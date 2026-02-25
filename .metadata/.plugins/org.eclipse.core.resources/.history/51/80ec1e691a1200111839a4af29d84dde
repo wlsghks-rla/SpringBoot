@@ -1,0 +1,9 @@
+package com.example.demo.di02;
+
+import lombok.Data;
+
+@Data
+public class Restaurant {
+
+	private Chief chief;
+}

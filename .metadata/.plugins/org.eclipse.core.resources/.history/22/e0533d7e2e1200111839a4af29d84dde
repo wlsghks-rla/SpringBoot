@@ -1,0 +1,44 @@
+package com.example.demo.di01;
+
+import org.springframework.stereotype.Component;
+
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+@Component("tv") // 컨테이너에 빈(객체 - new 키워드)으로 등록
+//@Scope("prototype") // prototype : 매번 새로운 객체 생성(=> 생성자 두번 반복), default: singleton 
+//@Lazy
+@RequiredArgsConstructor
+@Data
+public class LgTV  implements TV{
+
+//	@Autowired Speaker speaker; // 필드 주입방법
+	
+//	Speaker speaker; // 생성자 주입
+	
+	final Speaker speaker; // 생성자 주입(롬복) - 기억필수
+	
+//    @Setter(onMethod_ = {@Autowired}) // setter 주입
+//	Speaker speaker;
+	
+//	
+//	public LgTV() {
+////		this.speaker = speaker; // 생성자 주입
+//		System.out.println("LGTV 생성");
+//	}
+	
+	public void powerOn() {
+		System.out.println("LG TV--전원 on");
+	}
+	public void powerOff() {
+		System.out.println("LG TV--전원 off");
+	}
+	public void volumeUp() {
+//		System.out.println("LG TV--볼륨 up");
+		speaker.volumeUp();
+	}
+	public void volumeDown() {
+//		System.out.println("LG TV--볼륨 down");
+		speaker.volumeDown();
+	}
+}

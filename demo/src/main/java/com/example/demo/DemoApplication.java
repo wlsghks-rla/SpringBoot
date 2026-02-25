@@ -1,0 +1,21 @@
+package com.example.demo;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@SpringBootApplication
+public class DemoApplication {
+
+	@GetMapping("/")
+	public String main() {
+		return "hello~~~"; // pom.xml dependancy 수정 해야 수정내용 바로 보임.
+	}
+	
+	public static void main(String[] args) {
+		SpringApplication.run(DemoApplication.class, args);
+	}
+
+}

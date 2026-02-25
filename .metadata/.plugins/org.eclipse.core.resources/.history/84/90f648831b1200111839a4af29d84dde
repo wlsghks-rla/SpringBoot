@@ -1,0 +1,12 @@
+package com.example.demo.di02;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class RootConfig {
+
+	@Bean // 내가 만든 클래스가아닌 외부 클래스일 때 사용
+	public Chief chief() {
+		return new Chief();
+	}
+}

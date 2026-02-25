@@ -1,0 +1,23 @@
+package com.example.demo;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+
+import com.example.demo.di01.TV;
+
+@SpringBootTest // spring 컨테이너 구성
+public class DiTest {
+	
+	@Autowired ApplicationContext context; // spring 컨테이너
+	
+	@Test
+	public void test() {
+//		TV tv = Beanfactory.getBean("sm");
+		TV tv = context.getBean(TV.class);
+		tv.powerOn();
+		tv.volumeUp();
+	}
+	
+}

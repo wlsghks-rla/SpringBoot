@@ -1,0 +1,20 @@
+package com.example.demo;
+
+import org.junit.jupiter.api.Test;
+
+import com.example.demo.di01.Beanfactory;
+import com.example.demo.di01.SamsungTV;
+import com.example.demo.di01.TV;
+
+public class DiTest {
+	
+	
+	
+	@Test
+	public void test() {
+		TV tv = new SamsungTV();
+		tv.powerOn();
+		tv.volumeUp();
+	}
+	
+}
