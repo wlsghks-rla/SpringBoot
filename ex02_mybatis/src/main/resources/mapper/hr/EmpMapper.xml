@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.hr.mapper.EmpMapper">
+	
+	<!-- 부서등록(프로시저)  -->
+	<insert id="insertDeptProc" statementType="CALLABLE">
+	{ call add_department(
+	  #{departmentName},
+	  #{managerId},
+	  #{locationId}
+	  )
+	}  
+	
+	</insert>
+	
+	<!--  -->
+	<sql id = "empColumn">
+	       EMPLOYEE_ID "employeeId",
+           FIRST_NAME "firstName",
+           LAST_NAME,
+           EMAIL,
+           PHONE_NUMBER,
+           HIRE_DATE,
+           JOB_ID,
+           SALARY,
+           COMMISSION_PCT,
+           MANAGER_ID,
+           DEPARTMENT_ID 
+	</sql>
+	
+	<delete id="deleteByIds">
+	  delete form employees
+	  <where>
+	    <foreach item="item" index="index" collection="employee_id"
+        open="employee_id in (" separator="," close=")" nullable="true">
+          #{item}
+    </foreach>
+	  </where>
+	</delete>
+	
+	<delete id="deleteById">
+	  delete from employees
+	  where employee_id = #{id}
+	</delete>
+	
+	<select id="findByDeptAndName"
+	        parameterType="map">
+	<!--#{param1}  -->
+	SELECT *
+	  FROM EMPLOYEES
+	  <where>
+	    <if test="deptId != null and !deptId.equals('')">
+	        DEPARTMENT_ID = #{deptId}
+	    </if>
+	    <if test="fname != null and !fname.equals('')">
+	        AND Last_NAME = #{fname}
+	    </if>
+	  </where>
+	<!-- WHERE DEPARTMENT_ID = #{deptId}
+	  AND Last_NAME = #{fname} -->
+	</select>
+	
+	<!-- <map 단건 여러건></map> -->
+	<select id="findByIdMap" resultType = "map">
+	SELECT 
+	  <include refid="empColumn"></include>
+      FROM employees
+      WHERE employee_id = #{id}
+	</select>
+
+	<select id="findallMap">
+	SELECT
+	<include refid="empColumn"></include> 
+    FROM employees
+	</select>
+	
+	<!-- <vo 단건 여러건></map> -->
+	<select id="findall">
+	SELECT
+	<include refid="empColumn"></include>
+    FROM employees
+    <choose>
+    <when test="order != null">ORDER BY ${order}<!-- #{} ""존재  ${} ""없음 --></when>
+    <otherwise>order by first_name</otherwise>
+      
+    </choose>
+	</select>
+	
+	<select id="findall_COUNT" resultType="int">
+	  select count(*) from employees
+	</select>
+	
+    <select id="findById" resultType = "EmpVO">
+	SELECT
+	<include refid="empColumn"></include>
+      FROM employees
+      WHERE employee_id = #{id}
+	</select>
+	
+</mapper>  

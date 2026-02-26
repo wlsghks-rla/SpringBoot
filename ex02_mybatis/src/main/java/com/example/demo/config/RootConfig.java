@@ -1,17 +1,14 @@
-package com.example.demo;
+package com.example.demo.config;
 
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import com.zaxxer.hikari.HikariDataSource;
 
 
-//@Configuration
+//@Configuration( properties로 대체)
 public class RootConfig {
 
 	// DataSource Bean 등록

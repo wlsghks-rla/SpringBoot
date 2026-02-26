@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.board.mapper.ReplyMapper">
+  <sql id = "replyColumn">
+    RNO,
+    BNO,
+    REPLY,
+    REPLYER,
+    REPLYDATE,
+    UPDATEDATE
+  </sql>
+
+  <select id="findAllBno">
+  SELECT 
+  <include refid="replyColumn"></include>
+  FROM tbl_reply
+  WHERE bno = #{id}
+  </select>
+  
+  <select id="findById">
+    SELECT 
+    <include refid="replyColumn"></include>
+    FROM tbl_reply
+    WHERE rno = #{id}
+  </select>
+  
+  <insert id="insertReply">
+    INSERT INTO tbl_reply (
+                           <include refid="replyColumn"></include>)
+                           
+    Values(seq_reply.nextval,
+           #{bno},
+           #{reply},
+           #{replyer},
+           sysdate,
+           sysdate)
+  </insert>
+  
+  <delete id="delReply">
+    DELETE FROM tbl_reply
+    WHERE rno = ${id}
+  </delete>
+</mapper>
