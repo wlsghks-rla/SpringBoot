@@ -18,7 +18,7 @@
   WHERE bno = #{id}
   </select>
   
-  <select id="findById">
+  <select id="findByRno">
     SELECT 
     <include refid="replyColumn"></include>
     FROM tbl_reply
@@ -26,10 +26,13 @@
   </select>
   
   <insert id="insertReply">
+  <selectKey keyProperty="rno" resultType="int" order="BEFORE">
+    select seq_reply.nextval from dual
+  </selectKey>
     INSERT INTO tbl_reply (
                            <include refid="replyColumn"></include>)
                            
-    Values(seq_reply.nextval,
+    Values(#{rno},
            #{bno},
            #{reply},
            #{replyer},

@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 @Data
 public class ReplyVO {
-	String rno;
+	int rno;
 	String bno;
 	String reply;
 	String replyer;

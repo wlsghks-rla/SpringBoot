@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-4.0.0.js"
+      integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <ul id="result">
+      <li data-id="1">사과</li>
+      <li data-id="2">바나나</li>
+    </ul>
+    <script>
+      $("ul").on("click", "li", (e) => {
+        $(e.target).css("backgroundColor", "yellowgreen");
+        // alert(e.target.dataset.id);
+        alert($(e.target).data("id"));
+      });
+
+      $("#result").append("<li data-id='3'>수박</li>");
+    </script>
+  </body>
+</html>

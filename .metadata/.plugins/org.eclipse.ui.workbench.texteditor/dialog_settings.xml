@@ -4,6 +4,8 @@
 	<section name="java.lang.Class">
 		<item key="replaceBarOpen" value="false"/>
 		<list key="findhistory">
+			<item value="objectmapper"/>
+			<item value="build"/>
 			<item value="oracle"/>
 		</list>
 	</section>

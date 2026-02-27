@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-4.0.0.js"
+      integrity="sha256-9fsHeVnKBvqh3FB2HYu7g2xseAZ5MlN6Kz/qnkASV8U="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h1>게시글 상세보기</h1>
+    <form id="frm">
+      <input id="newBno" />
+      <input id="newReply" />
+      <input id="newReplyer" />
+      <button type="button" id="btnsave">등록</button>
+    </form>
+    <div id="reply"></div>
+  </body>
+  <script>
+    const bno = 4;
+    fetch(`/api/board/${bno}/reply`)
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+
+        json.forEach((elem) => {
+          $("#reply").append(
+            `<div><button data-id="${elem.rno}" type="button" id="btnDel">x</button>
+                  reply : ${elem.reply}, 
+                  replyer : ${elem.replyer}, 
+                  replydate : ${elem.replydate}
+            </div>`,
+          );
+        });
+      });
+    
+    // 삭제
+    $("#reply").on("click", "#btnDel", (e) => {
+    	let rno = $(e.target).data("id");
+    	 fetch(`/api/reply/${rno}`, {
+             method: "DELETE",
+           })
+         .then((res) => res.json())
+         .then(() => {
+        	 $(e.target).parent().remove();
+         })
+    })
+    
+    // 등록
+    $("#btnsave").on("click",(e) => {
+    	fetch(`/api/reply`, {
+            method: "POST",
+            body: JSON.stringify({
+            	bno: $("#newBno").val(),
+            	reply: $("#newReply").val(),
+            	replyer: $("#newReplyer").val()
+            }),
+            headers: {
+              "Content-type": "application/json; charset=UTF-8",
+            },
+          })
+            .then((response) => response.json())
+            .then((json) => {
+              console.log(json);
+              $("#reply").append(
+                `<div><button data-id="${json.rno}" type="button" id="btnDel">x</button>reply : ${json.reply}, 
+                  replyer : ${json.replyer}, 
+                  replydate : ${json.replydate}</div>`,
+              );
+            });
+    })
+  </script>
+</html>
