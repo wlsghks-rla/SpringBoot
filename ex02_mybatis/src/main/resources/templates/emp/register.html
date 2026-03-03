@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>list.html</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<style>
+.error { color:red;}
+</style>
+</head>
+<body>
+<h1>사원등록/수정</h1>
+<div class="container-sm">
+	<div class="card border-secondary" th:object="${emp}">
+	<form method="post">
+	  <div class="card-body">
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">사번</div>
+		    <div class="col-10  fw-bold"><input th:field="*{employeeId}"></div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">first name</div>
+		    <div class="col-10 fw-bold"><input th:field="*{firstName}">
+		      <div
+				  class="error"
+				  th:if="${#fields.hasErrors('firstName')}"
+				  th:errors="*{firstName}"
+				></div>
+		    </div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">lastName</div>
+		    <div class="col-10 fw-bold" ><input th:field="*{lastName}">
+			    <div
+				  class="error"
+				  th:if="${#fields.hasErrors('lastName')}"
+				  th:errors="*{lastName}"
+				></div>
+			</div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">email</div>
+		    <div class="col-10 fw-bold" ><input th:field="*{email}">
+		      <div
+				  class="error"
+				  th:if="${#fields.hasErrors('email')}"
+				  th:errors="*{email}"
+				></div>
+		    </div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">hireDate</div>
+		    <div class="col-10 fw-bold"><input th:field="*{hireDate}">
+		      <div
+				  class="error"
+				  th:if="${#fields.hasErrors('hireDate')}"
+				  th:errors="*{hireDate}"
+				></div>
+		    </div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">salary</div>
+		    <div class="col-10 fw-bold"><input th:field="*{salary}"></div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">commissionPct</div>
+		    <div class="col-10 fw-bold"><input th:field="*{commissionPct}"></div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">jobid</div>
+		    <div class="col-10 fw-bold"><input type="radio" 
+		                                       th:field="*{jobId}"
+		                                       th:each="job : ${jobList}"
+		                                       th:text="${job.jobTitle}"
+		                                       th:value="${job.jobId}">
+		      <div
+				  class="error"
+				  th:if="${#fields.hasErrors('jobId')}"
+				  th:errors="*{jobId}"
+				></div>
+		    </div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">부서명</div>
+		    <div class="col-10 fw-bold"><select th:field="*{departmentId}">
+		                                  <option th:each="dept : ${deptList}"
+		                                          th:text="${dept.departmentName}"
+		                                          th:value="${dept.departmentId}">
+		                                </select></div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">managerId</div>
+		    <div class="col-10 fw-bold"><input th:field="*{managerId}"></div>
+		  </div>	
+		  <div class="row">
+		    <div class="col-2">phoneNumber</div>
+		    <div class="col-10 fw-bold"><input th:field="*{phoneNumber}">
+		      <div
+				  class="error"
+				  th:if="${#fields.hasErrors('phoneNumber')}"
+				  th:errors="*{phoneNumber}"
+				></div>
+		    </div>
+		  </div>  
+	  </div>	
+	<div>
+	  <button type="submit" class="btn btn-primary">저장</button>
+	  <button type="button" class="btn btn-danger"><a href="/emp/list" class="link-light link-offset-2 link-underline-opacity-0">취소</a></button>
+	</div>
+	</form>
+	</div>
+</div>
+</body>
+</html>

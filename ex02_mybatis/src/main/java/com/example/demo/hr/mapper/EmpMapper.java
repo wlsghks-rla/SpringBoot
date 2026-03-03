@@ -12,6 +12,12 @@ public interface EmpMapper {
 	// 프로시저	
 	void insertDeptProc(DepartmentDTO dto);
 	
+	// 등록 3/3
+	void insert(EmpRequestVO vo);
+	
+	// 수정 3/3
+	int update(EmpVO vo);
+	
 	// 다건 삭제
 	int deleteByIds(Integer[] employeeId);
 	

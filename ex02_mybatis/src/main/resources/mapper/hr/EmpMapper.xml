@@ -29,6 +29,36 @@
            DEPARTMENT_ID 
 	</sql>
 	
+	<!-- 등록 -->
+	<insert id="insert">
+	    <selectKey keyProperty="employeeId" resultType="String" order="BEFORE">
+	      select EMPLOYEES_SEQ.NEXTVAL from dual
+	    </selectKey>
+		insert into employees(employee_id,
+		                      first_name,
+		                      last_name,
+		                      email,
+		                      hire_date,
+		                      salary,
+		                      commission_pct,
+		                      job_id,
+		                      department_id,
+		                      manager_id,
+		                      phone_number)
+		values(#{employeeId},
+		       #{firstName},
+		       #{lastName},
+		       #{email},
+		       #{hireDate},
+		       #{salary},
+		       #{commissionPct},
+		       #{jobId},
+		       #{departmentId},		      
+		       #{managerId},
+		       #{phoneNumber}
+		)					  
+	</insert>
+	
 	<delete id="deleteByIds">
 	  delete form employees
 	  <where>
@@ -39,6 +69,7 @@
 	  </where>
 	</delete>
 	
+	<!-- 단건삭제 -->
 	<delete id="deleteById">
 	  delete from employees
 	  where employee_id = #{id}
@@ -91,10 +122,24 @@
 	  select count(*) from employees
 	</select>
 	
+	<!-- 단건조회 -->
     <select id="findById" resultType = "EmpVO">
-	SELECT
-	<include refid="empColumn"></include>
-      FROM employees
+	SELECT e.employee_id,
+		   e.first_name,
+		   e.last_name,
+		   e.email,
+		   e.phone_number,
+		   e.hire_date,
+		   e.job_id,
+		   j.job_title,
+		   e.salary,
+		   NVL(e.commission_pct,0) commission_pct,
+		   e.manager_id,
+		   e.department_id,
+		   d.department_name	
+      FROM employees e
+      JOIN departments d ON e.department_id = d.department_id
+      JOIN jobs j ON e.job_id = j.job_id
       WHERE employee_id = #{id}
 	</select>
 	

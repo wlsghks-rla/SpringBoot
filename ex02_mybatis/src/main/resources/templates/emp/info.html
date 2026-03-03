@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+<h1>사원상세조회</h1>
+<div class="container-sm">
+	<div class="card border-secondary mb-2">
+	  <div class="card-body">
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">사번</div>
+		    <div class="col-10  fw-bold" th:text="${emp.employeeId}"></div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">name</div>
+		    <div class="col-10 fw-bold" th:text="|${emp.firstName} ${emp.lastName}|"></div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">급여 (수당)</div>
+		    <div class="col-10 fw-bold" th:text="|${#numbers.formatInteger(emp.salary,3,'COMMA')} (${emp.commissionPct==null? 0:emp.commissionPct})|">1,500 (1.2)</div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">입사년월</div>
+		    <div class="col-10 fw-bold" th:text="${#dates.format(emp.hireDate, 'yyyy/MM')}">2010/10</div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">jobId</div>
+		    <div class="col-10 fw-bold" th:text="${emp.jobId}">it</div>
+		  </div>
+		  <div class="row mb-2 border-bottom">
+		    <div class="col-2">jobTitle</div>
+		    <div class="col-10 fw-bold" th:text="${emp.jobTitle}">it</div>
+		  </div>
+		  <div class="row mb-0">
+		    <div class="col-2">부서명</div>
+		    <div class="col-10 fw-bold" th:text="${emp.departmentName}">1700</div>
+		  </div>	  
+	  </div>
+	</div>
+	<div>
+	  <button type="button" class="btn btn-primary">수정</button>
+	  <button type="button" class="btn btn-danger"><a th:href="@{/emp/delete/{id}(id=${emp.employeeId})}" class="link-light link-offset-2 link-underline-opacity-0">삭제</a></button>
+	</div>
+</div>
+</body>
+</html>
