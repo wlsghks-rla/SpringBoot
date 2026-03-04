@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
 </head>
 <body>
+<div layout:fragment="content">
 <h1>사원상세조회</h1>
 <div class="container-sm">
 	<div class="card border-secondary mb-2">
@@ -44,6 +47,8 @@
 	  <button type="button" class="btn btn-primary">수정</button>
 	  <button type="button" class="btn btn-danger"><a th:href="@{/emp/delete/{id}(id=${emp.employeeId})}" class="link-light link-offset-2 link-underline-opacity-0">삭제</a></button>
 	</div>
+</div>
+
 </div>
 </body>
 </html>

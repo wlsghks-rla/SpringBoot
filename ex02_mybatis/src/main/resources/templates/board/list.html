@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/layout}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <h1>게시글 조회</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="bo : ${list}">
+        <td>[[${bo.bno}]]</td>
+        <td><a th:href="@{/board/info/{id}(id=${bo.bno})}">[[${bo.title}]]</a></td>
+        <td>[[${bo.writer}]]</td>
+        <td th:text="${#dates.format(bo.regdate, 'yyyy/MM/dd')}"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <button type="button" class="btn btn-primary"><a th:href="@{/board/register}" class="link-light link-offset-2 link-underline-opacity-0">등록</a></button>
+  </div>
+  </div>
+</body>
+</html>

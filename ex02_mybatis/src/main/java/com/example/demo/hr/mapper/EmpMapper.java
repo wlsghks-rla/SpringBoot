@@ -13,7 +13,7 @@ public interface EmpMapper {
 	void insertDeptProc(DepartmentDTO dto);
 	
 	// 등록 3/3
-	void insert(EmpRequestVO vo);
+	int insert(EmpRequestVO vo);
 	
 	// 수정 3/3
 	int update(EmpVO vo);

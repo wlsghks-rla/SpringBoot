@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{common/layout}">
 <head>
 <meta charset="UTF-8">
 <title>list.html</title>
@@ -7,10 +9,12 @@
   .red {color: red;}
   .back {background-color: gray;}
 </style>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
 </head>
 <body>
-  <h1>사원조회</h1>
+<div layout:fragment="content">
+  <h1 th:utext="#{home.welcome}"></h1><!-- 메세지 출력(#{}) -->
+  <h1>사원조회 <!--/* [[${#lists.size(list)}]] */-->건</h1>
   <table border="1" class="mb-2">
 	  <thead>
 	      <tr>
@@ -20,6 +24,7 @@
 	      <th>salary</th>
 	      <th>hireDate</th>
 	      <th>입사년도</th>
+	      <th>매니저</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -27,12 +32,27 @@
 	      <td th:text="${empStat.count}">1</td>
 	      <td>[[${emp.employeeId}]]</td>
 	      <td><a th:href="@{/emp/info/{id}(id=${emp.employeeId})}" th:text="|${emp.firstName} ${emp.lastName}|">Scott King</a></td> 
-	      <td th:text="${#numbers.formatInteger(emp.salary,3,'COMMA')}" th:class="${emp.salary}<=10000 ? 'red' : ''">2,700</td>
+	      <td th:text="${#numbers.formatInteger(emp.salary,3,'COMMA')}" class="sal" th:class="${emp.salary}<=10000 ? 'red' : ''">2,700</td>
 	      <td th:text="${#dates.format(emp.hireDate, 'yyyy/MM/dd')}">2010/10/10</td>
 	      <td th:text="${#dates.year(emp.hireDate)}">2010</td>
+	      <td>
+	        <span th:if="${emp.managerId == null}">없음</span>
+	        <span th:unless="${emp.managerId == null}" th:text="${emp.managerId}"></span> <!-- if와 동일 조건식 사용 -->
+	      </td>
 	    </tr>
 	  </tbody>
   </table>
+  <div>
+      <b>TOTAL:</b>
+      <span th:text="*{#aggregates.sum(list.![salary])}">35.23</span> <!-- sum은 내장느낌 -->
+    </div>
+  <div th:insert="~{common/paging::paging(${1}, ${5})}"></div> <!-- 숫자대신 pagehelper 변수 삽입 -->
+  <!-- <div class="footer" th:replace="~{common/footer::copy}"></div> -->
   <button type="button" class="btn btn-primary"><a th:href="@{/emp/register}" class="link-light link-offset-2 link-underline-opacity-0">등록</a></button>
+  
+  <script th:inline="javascript">
+    const array = [[${list}]];
+  </script>
+</div>
 </body>
 </html>
