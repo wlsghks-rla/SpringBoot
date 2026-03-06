@@ -13,8 +13,7 @@ public class CommentResponseDto {
 	
 	public CommentResponseDto() {}
 	
-	public CommentResponseDto(Comments comment) {
-		
+	public CommentResponseDto(Comments comment) {		
 		this.id= comment.getId();
 		this.comment= comment.getComment();
 //		this.name= comment.getCustomer().getName();		
