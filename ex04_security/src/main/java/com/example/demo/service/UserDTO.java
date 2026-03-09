@@ -33,8 +33,9 @@ public class UserDTO implements UserDetails{
 	}
 
 	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getUsername() {		
+		return loginId;
 	}
+	
+	
 }

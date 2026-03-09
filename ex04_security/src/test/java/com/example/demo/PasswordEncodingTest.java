@@ -11,8 +11,8 @@ public class PasswordEncodingTest {
 	public void test() {
 		// Create an encoder with strength 16
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(16); // 강도
-		String result = encoder.encode("myPassword");
+		String result = encoder.encode("1111");
 		System.out.println(result);
-		assertTrue(encoder.matches("myPassword", result));
+		assertTrue(encoder.matches("1111", result));
 	}
 }

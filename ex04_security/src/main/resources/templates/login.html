@@ -11,6 +11,8 @@
             You have been logged out.
         </div>
         <form th:action="@{/login}" method="post">
+        <!--/* <input type="hidden" name="${_csrf.parameterName}" value="${_crf.token}" /> */--> 
+        <!-- /**/ 추가 안하면 일단 컴파일로인한 오류 발생함. -->
             <div><label> User Name : <input type="text" name="username"/> </label></div>
             <div><label> Password: <input type="password" name="password"/> </label></div>
             <div><input type="submit" value="Sign In"/></div>
@@ -18,4 +20,7 @@
         
         
     </body>
+    <script>
+      document.cookie = "tasty_cookie=strawberry";
+    </script>
 </html>

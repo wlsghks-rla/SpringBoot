@@ -10,6 +10,10 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="princi"/>
+			<item value="principla"/>
+			<item value="principal"/>
+			<item value="extras"/>
 			<item value="h2-console"/>
 			<item value="emp."/>
 			<item value="empMapper"/>
